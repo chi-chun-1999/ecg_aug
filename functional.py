@@ -48,12 +48,12 @@ def spec_aug(x, mag):
     mag = mag.item()
     
     # get shapes
-    BS, NF, NT, _ = torch.stft(x[:,0,], n_fft=512, hop_length=4).shape
+    BS, NF, NT, _ = torch.stft(x[:,0,], n_fft=512, hop_length=4,return_complex=False).shape
     nmf = int(mag*NF)
     start = torch.randint(0, NF-nmf,[1]).long()
     end = (start + nmf).long()
     for i in range(12):
-        stft_inp = torch.stft(x[:,i,], n_fft=512, hop_length=4)
+        stft_inp = torch.stft(x[:,i,], n_fft=512, hop_length=4,return_complex=True)
         idxs = torch.zeros(*stft_inp.shape).bool()
         stft_inp[torch.arange(BS).long(), start:end,:] = 0
         x_aug[:, i] = torch.istft(stft_inp, n_fft=512, hop_length=4)
