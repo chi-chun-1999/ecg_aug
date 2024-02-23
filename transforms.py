@@ -103,18 +103,18 @@ class Standardize(_Tramsforms):
         
 
 class RandTemporalWarp(_Tramsforms):
-    """TemporalWarp
-    
-    :param operation:
-    :param magnitude: recommand [0, 2]
-    :param probability for tramsform
-    """
     
     def __init__(self,
                  magnitude,
                  probability=0.5,
                 ecg_length=1024
                 ):
+        """TemporalWarp
+        
+        :param operation:
+        :param magnitude: recommand [0, 2]
+        :param probability for tramsform
+        """
         
         super().__init__(rand_temporal_warp, magnitude, probability, ecg_length)
         
@@ -140,48 +140,48 @@ class RandTemporalWarp(_Tramsforms):
         
 
 class BaselineWander(_Tramsforms):
-    """BaselineWander
-    
-    :param operation:
-    :param magnitude:
-    :param probability for tramsform
-    """
     
     def __init__(self,
                  magnitude,
                  probability=0.5,
                 ecg_length=1024
                 ):
+        """BaselineWander
+        
+        :param operation:
+        :param magnitude:
+        :param probability for tramsform
+        """
         super().__init__(baseline_wander, magnitude, probability, ecg_length)
 
 class GaussianNoise(_Tramsforms):
-    """GaussianNoise
-    
-    :param operation:
-    :param magnitude: recommand [-1, 1]
-    :param probability for tramsform
-    """
     
     def __init__(self,
                  magnitude,
                  probability=0.5,
                 ecg_length=1024
                 ):
+        """GaussianNoise
+        
+        :param operation:
+        :param magnitude: recommand [-1, 1]
+        :param probability for tramsform
+        """
         super().__init__(gaussian_noise, magnitude, probability, ecg_length)
 
 class RandCrop(_Tramsforms):
-    """RandCrop
-    
-    :param operation:
-    :param magnitude: recommand to less than 0.1
-    :param probability for tramsform
-    """
     
     def __init__(self,
                  magnitude,
                  probability=0.5,
                 ecg_length=1024
                 ):
+        """RandCrop
+        
+        :param operation:
+        :param magnitude: recommand to less than 0.1
+        :param probability for tramsform
+        """
         super().__init__(rand_crop, magnitude, probability, ecg_length)
         
     def forward(self, input):
@@ -195,18 +195,18 @@ class RandCrop(_Tramsforms):
             return input
     
 class RandDisplacement(_Tramsforms):
-    """RandDisplacement
-    
-    :param operation:
-    :param magnitude: recommand to less than 1
-    :param probability for tramsform
-    """
     
     def __init__(self,
                  magnitude:list,
                  probability=0.5,
                 ecg_length=1024
                 ):
+        """RandDisplacement
+        
+        :param operation:
+        :param magnitude: recommand to less than 1
+        :param probability for tramsform
+        """
         super().__init__(rand_displacement, magnitude, probability, ecg_length)
         
         self.warp_obj = warp_ops.DispAug([ecg_length])
@@ -222,32 +222,32 @@ class RandDisplacement(_Tramsforms):
             return input
 
 class SpecAug(_Tramsforms):
-    """SpecAug
-    
-    :param operation:
-    :param magnitude: less than 0.1
-    :param probability for tramsform
-    """
     
     def __init__(self,
                  magnitude=0.1,
                  probability=0.5,
                 ecg_length=1024
                 ):
+        """SpecAug
+        
+        :param operation:
+        :param magnitude: less than 0.1
+        :param probability for tramsform
+        """
         super().__init__(spec_aug, magnitude, probability, ecg_length)
 
 class MagnitudeScale(_Tramsforms):
-    """MagnitudeScale
-    
-    :param operation:
-    :param magnitude:
-    :param probability for tramsform
-    """
     
     def __init__(self,
                  magnitude,
                  probability=0.5,
                 ecg_length=1024
                 ):
+        """MagnitudeScale
+        
+        :param operation:
+        :param magnitude:
+        :param probability for tramsform
+        """
         super().__init__(magnitude_scale, magnitude, probability, ecg_length)
         
