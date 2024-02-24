@@ -11,9 +11,10 @@ import torch
 from torch import nn
 from torch.distributions import RelaxedBernoulli, Bernoulli
 
-from functional import (rand_temporal_warp, baseline_wander, gaussian_noise, rand_crop, spec_aug, rand_displacement, magnitude_scale)
+from .functional import (rand_temporal_warp, baseline_wander, gaussian_noise, rand_crop, spec_aug, rand_displacement, magnitude_scale)
 
-import warp_ops
+from . import warp_ops
+import numpy as np
 
 
 class _Tramsforms(nn.Module):
@@ -95,11 +96,25 @@ class Standardize(_Tramsforms):
             return input
     
     def _operation(self, x):
-        BS, C, L = x.shape
+        
+        if len(x.shape) == 2:
+            if type(x) == torch.Tensor:
+                stdval = torch.std(x, dim=1).view(-1, 1).detach()
+                meanval = torch.mean(x, dim=1).view(-1, 1).detach()
+            elif type(x) == np.ndarray:
+                stdval = np.std(x, axis=1).reshape(-1, 1)
+                meanval = np.mean(x, axis=1).reshape(-1, 1)
+            return (x - meanval)/stdval
+        elif len(x.shape) == 3:
+            BS, C, L = x.shape
 
-        stdval = torch.std(x, dim=2).view(BS, C, 1).detach()
-        meanval = torch.mean(x, dim=2).view(BS, C, 1).detach()
-        return (x - meanval)/stdval
+            stdval = torch.std(x, dim=2).view(BS, C, 1).detach()
+            meanval = torch.mean(x, dim=2).view(BS, C, 1).detach()
+            return (x - meanval)/stdval
+        
+        else:
+            raise ValueError("Input shape not supported")
+
         
 
 class RandTemporalWarp(_Tramsforms):
