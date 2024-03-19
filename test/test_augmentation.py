@@ -4,7 +4,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 
 #%%
-from tramsforms import *
+from transforms import *
 from util.data import loadECGHDF52Dataframe
 import torch
 import matplotlib.pyplot as plt
@@ -30,7 +30,8 @@ plt.plot(ori_sample[0,0,:].detach().numpy())
 std = Standardize(0.5, 1)
 
 transform = std(ori_sample)
-sample = transform
+# sample = transform
+sample = ori_sample
 
 # sample = torch.tensor(tmp)
 
@@ -82,12 +83,18 @@ trans = BaselineWander(5, 1)
 
 transform = trans(sample)
 
-# plt.plot(transform[1,0,:].detach().numpy())
-# plt.show()
-# plt.plot(sample[1,0,:].detach().numpy())
-# plt.show()
-show_ecg(transform[1],figsize=(15,15))
-show_ecg(sample[1],figsize=(15,15))
+plt.figure(figsize=(15,5))
+plt.ylim(-0.5, 0.5)
+plt.plot([i for i in range(1024)],[0 for i in range(1024)],'r')
+plt.plot(transform[1,0,:].detach().numpy())
+plt.show()
+plt.figure(figsize=(15,5))
+plt.ylim(-0.5, 0.5)
+plt.plot([i for i in range(1024)],[0 for i in range(1024)],'r')
+plt.plot(sample[1,0,:].detach().numpy())
+plt.show()
+# show_ecg(transform[1],figsize=(15,15))
+# show_ecg(sample[1],figsize=(15,15))
 
 # %%
 
@@ -101,8 +108,18 @@ transform = trans(sample)
 # plt.show()
 # plt.plot(sample[1,0,:].detach().numpy())
 # plt.show()
-show_ecg(transform[1],figsize=(15,15))
-show_ecg(sample[1],figsize=(15,15))
+plt.figure(figsize=(15,5))
+plt.ylim(-0.5, 0.5)
+plt.plot([i for i in range(1024)],[0 for i in range(1024)],'r')
+plt.plot(transform[1,0,:].detach().numpy())
+plt.show()
+plt.figure(figsize=(15,5))
+plt.ylim(-0.5, 0.5)
+plt.plot([i for i in range(1024)],[0 for i in range(1024)],'r')
+plt.plot(sample[1,0,:].detach().numpy())
+plt.show()
+# show_ecg(transform[1],figsize=(15,15))
+# show_ecg(sample[1],figsize=(15,15))
 
 
 # %%
@@ -117,8 +134,18 @@ transform = trans(sample)
 # plt.show()
 # plt.plot(sample[1,0,:].detach().numpy())
 # plt.show()
-show_ecg(transform[1],figsize=(15,15))
-show_ecg(sample[1],figsize=(15,15))
+plt.figure(figsize=(15,5))
+plt.ylim(-0.5, 0.5)
+plt.plot([i for i in range(1024)],[0 for i in range(1024)],'r')
+plt.plot(transform[1,0,:].detach().numpy())
+plt.show()
+plt.figure(figsize=(15,5))
+plt.ylim(-0.5, 0.5)
+plt.plot([i for i in range(1024)],[0 for i in range(1024)],'r')
+plt.plot(sample[1,0,:].detach().numpy())
+plt.show()
+# show_ecg(transform[1],figsize=(15,15))
+# show_ecg(sample[1],figsize=(15,15))
 
 #%%
 
@@ -130,8 +157,20 @@ transform = trans(sample)
 # plt.show()
 # plt.plot(sample[1,0,:].detach().numpy())
 # plt.show()
-show_ecg(transform[1],figsize=(15,15))
-show_ecg(sample[1],figsize=(15,15))
+plt.figure(figsize=(15,5))
+plt.ylim(-0.5, 0.5)
+plt.plot([i for i in range(1024)],[0 for i in range(1024)],'r')
+plt.plot([512 for i in range(100)],[0.5-i*0.01 for i in range(100)],'r')
+plt.plot(transform[1,0,:].detach().numpy())
+plt.show()
+plt.figure(figsize=(15,5))
+plt.ylim(-0.5, 0.5)
+plt.plot([i for i in range(1024)],[0 for i in range(1024)],'r')
+plt.plot([512 for i in range(100)],[0.5-i*0.01 for i in range(100)],'r')
+plt.plot(sample[1,0,:].detach().numpy())
+plt.show()
+# show_ecg(transform[1],figsize=(15,15))
+# show_ecg(sample[1],figsize=(15,15))
 # %%
 
 # test SpecAug
@@ -158,7 +197,19 @@ transform = trans(sample)
 # plt.show()
 # plt.plot(sample[1,0,:].detach().numpy())
 # plt.show()
-show_ecg(transform[1],figsize=(15,15))
-show_ecg(sample[1],figsize=(15,15))
+plt.figure(figsize=(15,3))
+# plt.ylim(-0.5, 0.5)
+plt.plot([i for i in range(1024)],[0 for i in range(1024)],'r')
+# plt.plot([512 for i in range(100)],[0.5-i*0.01 for i in range(100)],'r')
+plt.plot(transform[1,0,:].detach().numpy())
+plt.show()
+plt.figure(figsize=(15,3))
+# plt.ylim(-0.5, 0.5)
+plt.plot([i for i in range(1024)],[0 for i in range(1024)],'r')
+# plt.plot([512 for i in range(100)],[0.5-i*0.01 for i in range(100)],'r')
+plt.plot(sample[1,0,:].detach().numpy())
+plt.show()
+# show_ecg(transform[1],figsize=(15,15))
+# show_ecg(sample[1],figsize=(15,15))
 
 # %%
