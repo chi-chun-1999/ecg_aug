@@ -11,7 +11,7 @@ import torch
 from torch import nn
 from torch.distributions import RelaxedBernoulli, Bernoulli
 
-from functional import (rand_temporal_warp, baseline_wander, gaussian_noise, rand_crop, spec_aug, rand_displacement, magnitude_scale)
+from functional import (rand_temporal_warp, baseline_wander, gaussian_noise, rand_crop, spec_aug, rand_displacement, magnitude_scale, square_noise, sine_noise_partial, white_noise, sine_noise_partial, white_noise_partial, gaussian_noise_partial)
 
 # from . import warp_ops
 import warp_ops
@@ -266,4 +266,109 @@ class MagnitudeScale(_Tramsforms):
         :param probability for tramsform
         """
         super().__init__(magnitude_scale, magnitude, probability, ecg_length)
+
+class SquareNoise(_Tramsforms):
+    
+    def __init__(self,
+                 magnitude=1,
+                 probability=0.5,
+                ecg_length=1024
+                ):
+        """SquareNoise
         
+        :param operation:
+        :param magnitude: recommand [0, 0.5]
+        :param probability for tramsform
+        """
+        super().__init__(square_noise, magnitude, probability, ecg_length)
+
+
+class SineNoisePartial(_Tramsforms):
+        
+        def __init__(self,
+                    magnitude,
+                    probability=0.5,
+                    ecg_length=1024
+                    ):
+            """SineNoisePartial
+            
+            :param operation:
+            :param magnitude: recommand [0, 1]
+            :param probability for tramsform
+            """
+            super().__init__(sine_noise_partial, magnitude, probability, ecg_length)
+
+class WhiteNoise(_Tramsforms):
+    
+    def __init__(self,
+                 magnitude=0.015,
+                 probability=0.5,
+                ecg_length=1024
+                ):
+        """WhiteNoise
+        
+        :param operation:
+        :param magnitude: recommand [0, 0.5]
+        :param probability for tramsform
+        """
+        super().__init__(white_noise, magnitude, probability, ecg_length)
+
+class SineNoisePartial(_Tramsforms):
+    
+    def __init__(self,
+                 magnitude=0.5,
+                 probability=0.5,
+                ecg_length=1024
+                ):
+        """SineNoisePartial
+        
+        :param operation:
+        :param magnitude: recommand [0, 1]
+        :param probability for tramsform
+        """
+        super().__init__(sine_noise_partial, magnitude, probability, ecg_length)
+
+class SquareNoisePartial(_Tramsforms):
+
+    def __init__(self,
+                 magnitude=0.5,
+                 probability=0.5,
+                ecg_length=1024
+                ):
+        """SquareNoisePartial
+        
+        :param operation:
+        :param magnitude: recommand [0, 0.5]
+        :param probability for tramsform
+        """
+        super().__init__(square_noise, magnitude, probability, ecg_length)
+
+class WhiteNoisePartial(_Tramsforms):
+    
+    def __init__(self,
+                 magnitude=0.2,
+                 probability=0.5,
+                ecg_length=1024
+                ):
+        """WhiteNoisePartial
+        
+        :param operation:
+        :param magnitude: recommand [0, 0.5]
+        :param probability for tramsform
+        """
+        super().__init__(white_noise_partial, magnitude, probability, ecg_length)
+
+class GaussianNoisePartial(_Tramsforms):
+        
+        def __init__(self,
+                    magnitude=0.5,
+                    probability=0.5,
+                    ecg_length=1024
+                    ):
+            """GaussianNoisePartial
+            
+            :param operation:
+            :param magnitude: recommand [0, 0.5]
+            :param probability for tramsform
+            """
+            super().__init__(gaussian_noise_partial, magnitude, probability, ecg_length)

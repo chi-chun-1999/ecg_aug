@@ -213,3 +213,156 @@ plt.show()
 # show_ecg(sample[1],figsize=(15,15))
 
 # %%
+
+trans = SquareNoise(1,0.5)
+
+transform = trans(sample)
+
+# plt.plot(transform[1,0,:].detach().numpy())
+# plt.show()
+# plt.plot(sample[1,0,:].detach().numpy())
+# plt.show()
+plt.figure(figsize=(15,3))
+# plt.ylim(-0.5, 0.5)
+plt.plot([i for i in range(1024)],[0 for i in range(1024)],'r')
+# plt.plot([512 for i in range(100)],[0.5-i*0.01 for i in range(100)],'r')
+plt.plot(transform[1,0,:].detach().numpy())
+plt.show()
+plt.figure(figsize=(15,3))
+# plt.ylim(-0.5, 0.5)
+plt.plot([i for i in range(1024)],[0 for i in range(1024)],'r')
+# plt.plot([512 for i in range(100)],[0.5-i*0.01 for i in range(100)],'r')
+plt.plot(sample[1,0,:].detach().numpy())
+plt.show()
+# show_ecg(transform[1],figsize=(15,15))
+# show_ecg(sample[1],figsize=(15,15))
+
+
+# %%
+
+trans = WhiteNoise(0.015, 1)
+
+transform = trans(sample)
+
+# plt.plot(transform[1,0,:].detach().numpy())
+# plt.show()
+# plt.plot(sample[1,0,:].detach().numpy())
+# plt.show()
+plt.figure(figsize=(15,3))
+# plt.ylim(-0.5, 0.5)
+plt.plot([i for i in range(1024)],[0 for i in range(1024)],'r')
+# plt.plot([512 for i in range(100)],[0.5-i*0.01 for i in range(100)],'r')
+plt.plot(transform[1,0,:].detach().numpy())
+plt.show()
+plt.figure(figsize=(15,3))
+# plt.ylim(-0.5, 0.5)
+plt.plot([i for i in range(1024)],[0 for i in range(1024)],'r')
+# plt.plot([512 for i in range(100)],[0.5-i*0.01 for i in range(100)],'r')
+plt.plot(sample[1,0,:].detach().numpy())
+plt.show()
+# show_ecg(transform[1],figsize=(15,15))
+# show_ecg(sample[1],figsize=(15,15))
+
+# %%
+
+trans = SineNoisePartial(0.5, 1)
+
+transform = trans(sample)
+
+
+# plt.plot(transform[1,0,:].detach().numpy())
+# plt.show()
+# plt.plot(sample[1,0,:].detach().numpy())
+# plt.show()
+# plt.figure(figsize=(15,3))
+# # plt.ylim(-0.5, 0.5)
+# plt.plot([i for i in range(1024)],[0 for i in range(1024)],'r')
+# # plt.plot([512 for i in range(100)],[0.5-i*0.01 for i in range(100)],'r')
+# plt.plot(transform[1,0,:].detach().numpy())
+# plt.show()
+# plt.figure(figsize=(15,3))
+# # plt.ylim(-0.5, 0.5)
+# plt.plot([i for i in range(1024)],[0 for i in range(1024)],'r')
+# # plt.plot([512 for i in range(100)],[0.5-i*0.01 for i in range(100)],'r')
+# plt.plot(sample[1,0,:].detach().numpy())
+# plt.show()
+show_ecg(transform[1],figsize=(15,15))
+show_ecg(sample[1],figsize=(15,15))
+
+# %%
+
+trans = SquareNoisePartial(0.5, 1)
+
+transform = trans(sample)
+
+
+# plt.plot(transform[1,0,:].detach().numpy())
+# plt.show()
+# plt.plot(sample[1,0,:].detach().numpy())
+# plt.show()
+# plt.figure(figsize=(15,3))
+# # plt.ylim(-0.5, 0.5)
+# plt.plot([i for i in range(1024)],[0 for i in range(1024)],'r')
+# # plt.plot([512 for i in range(100)],[0.5-i*0.01 for i in range(100)],'r')
+# plt.plot(transform[1,0,:].detach().numpy())
+# plt.show()
+# plt.figure(figsize=(15,3))
+# # plt.ylim(-0.5, 0.5)
+# plt.plot([i for i in range(1024)],[0 for i in range(1024)],'r')
+# # plt.plot([512 for i in range(100)],[0.5-i*0.01 for i in range(100)],'r')
+# plt.plot(sample[1,0,:].detach().numpy())
+# plt.show()
+show_ecg(transform[1],figsize=(15,15))
+show_ecg(sample[1],figsize=(15,15))
+# %%
+
+trans = WhiteNoisePartial(0.2, 1)
+
+transform = trans(sample)
+
+# plt.plot(transform[1,0,:].detach().numpy())
+# plt.show()
+# plt.plot(sample[1,0,:].detach().numpy())
+# plt.show()
+# plt.figure(figsize=(15,3))
+# # plt.ylim(-0.5, 0.5)
+# plt.plot([i for i in range(1024)],[0 for i in range(1024)],'r')
+# # plt.plot([512 for i in range(100)],[0.5-i*0.01 for i in range(100)],'r')
+# plt.plot(transform[1,0,:].detach().numpy())
+# plt.show()
+# plt.figure(figsize=(15,3))
+# # plt.ylim(-0.5, 0.5)
+# plt.plot([i for i in range(1024)],[0 for i in range(1024)],'r')
+# # plt.plot([512 for i in range(100)],[0.5-i*0.01 for i in range(100)],'r')
+# plt.plot(sample[1,0,:].detach().numpy())
+# plt.show()
+show_ecg(transform[1],figsize=(15,15))
+show_ecg(sample[1],figsize=(15,15))
+# %%
+
+trans = GaussianNoisePartial(0.5, 1)
+
+transform = trans(sample)
+
+
+# plt.plot(transform[1,0,:].detach().numpy())
+# plt.show()
+# plt.plot(sample[1,0,:].detach().numpy())
+# plt.show()
+# plt.figure(figsize=(15,3))
+# # plt.ylim(-0.5, 0.5)
+# plt.plot([i for i in range(1024)],[0 for i in range(1024)],'r')
+# # plt.plot([512 for i in range(100)],[0.5-i*0.01 for i in range(100)],'r')
+# plt.plot(transform[1,0,:].detach().numpy())
+# plt.show()
+# plt.figure(figsize=(15,3))
+# # plt.ylim(-0.5, 0.5)
+# plt.plot([i for i in range(1024)],[0 for i in range(1024)],'r')
+# # plt.plot([512 for i in range(100)],[0.5-i*0.01 for i in range(100)],'r')
+# plt.plot(sample[1,0,:].detach().numpy())
+# plt.show()
+show_ecg(transform[1],figsize=(15,15))
+show_ecg(sample[1],figsize=(15,15))
+
+
+# %%
