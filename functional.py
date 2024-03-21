@@ -16,7 +16,7 @@ def baseline_wander(x, mag):
     BS, C, L = x.shape
 
     # form baseline drift
-    strength = 0.25*torch.sigmoid(mag) * (torch.rand(BS).to(x.device).view(BS,1,1))
+    strength = torch.sigmoid(mag) * (torch.rand(BS).to(x.device).view(BS,1,1))
     strength = strength.view(BS, 1, 1)
 
     frequency = ((torch.rand(BS) * 20 + 10) * 10 / 60).view(BS, 1, 1)  # typical breaths per second for an adult
@@ -123,6 +123,7 @@ def sine_noise_partial(x, mag):
     Returns:
         X_sine_p:
     """
+    # print('sine_noise_partial')
     X_sine_p = x.clone()
     BS, C, L = x.shape
 
@@ -170,6 +171,7 @@ def square_noise_partial(x, mag):
     return X_square_p
 
 def white_noise_partial(x, mag):
+    # print('white_noise_partial')
 
     X_wnp = x.clone()
     B, C, L = x.shape
@@ -185,6 +187,8 @@ def white_noise_partial(x, mag):
     return X_wnp
 
 def gaussian_noise_partial(x, mag, noise_mag=2):
+    # print('gaussian_noise_partial')
+    
     x_gnp = x.clone()
     BS, C, L = x_gnp.shape
     stdval = torch.std(x_gnp, dim=2).view(BS, C, 1).detach()
