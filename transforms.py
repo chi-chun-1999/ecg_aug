@@ -11,7 +11,7 @@ import torch
 from torch import nn
 from torch.distributions import RelaxedBernoulli, Bernoulli
 
-from .functional import (rand_temporal_warp, baseline_wander, gaussian_noise, rand_crop, spec_aug, rand_displacement, magnitude_scale)
+from .functional import (rand_temporal_warp, baseline_wander, gaussian_noise, rand_crop, spec_aug, rand_displacement, magnitude_scale, white_noise, sine_noise_partial, square_noise, square_noise_partial, white_noise_partial, gaussian_noise_partial)
 
 from . import warp_ops
 # import warp_ops
@@ -50,6 +50,10 @@ class _Tramsforms(nn.Module):
             return transformed
         else:
             return input
+    
+    @property
+    def p(self):
+        return self.probability
     
 
 class NoOp(_Tramsforms):
