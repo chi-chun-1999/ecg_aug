@@ -101,15 +101,19 @@ def square_noise(x, mag):
     steps = torch.linspace(0, 1, L).view(1, 1, -1) * frequency.float() + phase.float()
     
     # print(steps)
+    square_curve = scipy_signal.square(steps)
+    square_curve = torch.tensor(square_curve).to(x.device)
+    
 
-    noise = torch.sigmoid(mag)*stdval*scipy_signal.square(steps)
+    noise = torch.sigmoid(mag).to(x.device)*stdval*square_curve
     
     return x + noise
     
     
 def white_noise(x, mag):
     BS, C, L = x.shape
-    noise = torch.randn(1)*mag*torch.randn(BS, C, L).to(x.device)
+    # print('white_noise',x.device,mag.device)
+    noise = torch.randn(1).to(x.device)*mag*torch.randn(BS, C, L).to(x.device)
     return x + noise
 
 
@@ -134,10 +138,10 @@ def sine_noise_partial(x, mag):
     # print(frequency)
     phase = (torch.rand(BS) * 2 * np.pi).view(BS, 1, 1)
     steps = torch.linspace(0, 1, L).view(1, 1, -1) * frequency.float() + phase.float()
-    sine_curve = torch.sin(steps)
+    sine_curve = torch.sin(steps).to(x.device)
 
     # w_ratio = np.random.rand() * mag # Random value between 0 - M
-    w_ratio = torch.rand(1)*mag
+    w_ratio = torch.rand(1).to(x.device)*mag
     width = int(L * w_ratio)
     start = int(torch.rand(1) * (L - width))
     # for w in range(width):
@@ -159,11 +163,12 @@ def square_noise_partial(x, mag):
     square_curve = scipy_signal.square(steps)
 
     # w_ratio = np.random.rand() * mag # Random value between 0 - M
-    w_ratio = torch.rand(1)*mag
+    w_ratio = torch.rand(1).to(x.device)*mag
     width = int(L * w_ratio)
-    start = int(torch.rand(1) * (L - width))
+    start = int(torch.rand(1).to(x.device) * (L - width))
     # for w in range(width):
     #     X_sine_p[:, :, start+w] += sine_curve[np.newaxis, np.newaxis, w]
+    square_curve = torch.tensor(square_curve).to(x.device)
 
     X_square_p[:,:, start:start+width] += square_curve[:, :, :width]
 
@@ -176,9 +181,9 @@ def white_noise_partial(x, mag):
     X_wnp = x.clone()
     B, C, L = x.shape
 
-    w_ratio = torch.rand(1)*mag
+    w_ratio = torch.rand(1).to(x.device)*mag
     width = int(L * w_ratio)
-    start = int(torch.rand(1) * (L - width))
+    start = int(torch.rand(1).to(x.device) * (L - width))
 
     white_noise_partial = torch.randn(B, C, width).to(x.device)*mag
 
@@ -192,7 +197,7 @@ def gaussian_noise_partial(x, mag, noise_mag=2):
     x_gnp = x.clone()
     BS, C, L = x_gnp.shape
     stdval = torch.std(x_gnp, dim=2).view(BS, C, 1).detach()
-    w_ratio = torch.rand(1)*mag
+    w_ratio = torch.rand(1).to(x.device)*mag
     width = int(L * w_ratio)
     start = int(torch.rand(1) * (L - width))
     noise = 0.25*stdval*torch.sigmoid(torch.tensor(noise_mag))*torch.randn(BS, C, width).to(x_gnp.device)

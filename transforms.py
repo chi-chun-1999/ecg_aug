@@ -345,7 +345,7 @@ class SquareNoisePartial(_Tramsforms):
         :param magnitude: recommand [0, 0.5]
         :param probability for tramsform
         """
-        super().__init__(square_noise, magnitude, probability, ecg_length)
+        super().__init__(square_noise_partial, magnitude, probability, ecg_length)
 
 class WhiteNoisePartial(_Tramsforms):
     

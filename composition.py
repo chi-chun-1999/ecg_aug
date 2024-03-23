@@ -57,7 +57,7 @@ class SomeOf(BaseCompose):
     def __call__(self, data):
             
             self.randomize_paremeter()
-            print(self.transforms_index)
+            # print(self.transforms_index)
 
             for i in self.transforms_index:
                 data = self.transforms[i](data)
